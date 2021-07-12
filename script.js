@@ -1,6 +1,7 @@
 const objEle = { // objetos elementos globais
   cores: document.querySelectorAll('.table .tr'),
   paragrafo: document.querySelector('#rgb-color'),
+  iniciarBotao: document.querySelector('#reset-game'),
 };
 
 const objFun = { // objetos funções
@@ -34,11 +35,20 @@ const objFun = { // objetos funções
       }
     });
   },
+  start: function iniciar() {
+    objEle.iniciarBotao.addEventListener('click', () => {
+      document.querySelector('.tr').innerHTML = '';
+      objFun.criaPaleta();
+      objFun.aleatorioTexto();
+      document.querySelector('#answer').innerText = 'Escolha uma cor';
+      objFun.jogo();
+    });
+  },
 };
 
 window.onload = () => {
-  objFun.colorRadom();
   objFun.criaPaleta();
   objFun.aleatorioTexto();
   objFun.jogo();
+  objFun.start();
 };
