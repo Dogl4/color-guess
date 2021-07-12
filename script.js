@@ -4,23 +4,23 @@ const objEle = { // objetos elementos globais
 };
 
 const objFun = { // objetos funções
-  colorRadom: function corAleatoria() {
+  colorRadom: function corAleatoria() { // cor aleatoria
     const red = Math.floor(Math.random() * 255);
     const green = Math.floor(Math.random() * 255);
     const blue = Math.floor(Math.random() * 255);
     return `rgb(${red}, ${green}, ${blue})`;
   },
-  criaPaleta: function createPaletteLine() {
+  criaPaleta: function createPaletteLine() { // cria paleta
     for (let i = 0; i < 6; i += 1) {
       const paletteColor = document.createElement('div');
-      paletteColor.className = 'color td';
+      paletteColor.className = 'ball td';
       paletteColor.style.backgroundColor = objFun.colorRadom();
       objEle.cores[0].appendChild(paletteColor);
     }
   },
-  aleatorioTexto: function text() {
+  aleatorioTexto: function text() { // atribui uma cor da paleta ao paragrafo
     const lista = document.querySelectorAll('.table .td');
-    const aleatorio = lista[Math.floor(Math.random() * 6)].style.backgroundColor;
+    const aleatorio = lista[Math.floor(Math.random() * 5)].style.backgroundColor;
     objEle.paragrafo.innerText = aleatorio;
   },
 };
