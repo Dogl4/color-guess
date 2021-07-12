@@ -1,17 +1,16 @@
-const objEle = {
+const objEle = { // objetos elementos globais
   cores: document.querySelectorAll('.table .tr'),
+  paragrafo: document.querySelector('#rgb-color'),
 };
 
-const objFun = {
+const objFun = { // objetos funções
   colorRadom: function corAleatoria() {
-    const option = '0123456789ABCDEF';
-    let hex = '';
-    do {
-      hex += option[(Math.floor(Math.random() * 16)).toString()];
-    } while (hex.length !== 6 || hex === 'FFFFFF');
-    return `#${hex}`;
+    const red = Math.floor(Math.random() * 255);
+    const green = Math.floor(Math.random() * 255);
+    const blue = Math.floor(Math.random() * 255);
+    return `rgb(${red}, ${green}, ${blue})`;
   },
-  CriaPaleta: function createPaletteLine() {
+  criaPaleta: function createPaletteLine() {
     for (let i = 0; i < 6; i += 1) {
       const paletteColor = document.createElement('div');
       paletteColor.className = 'color td';
@@ -19,9 +18,15 @@ const objFun = {
       objEle.cores[0].appendChild(paletteColor);
     }
   },
+  aleatorioTexto: function text() {
+    const lista = document.querySelectorAll('.table .td');
+    const aleatorio = lista[Math.floor(Math.random() * 6)].style.backgroundColor;
+    objEle.paragrafo.innerText = aleatorio;
+  },
 };
 
 window.onload = () => {
   objFun.colorRadom();
-  objFun.CriaPaleta();
+  objFun.criaPaleta();
+  objFun.aleatorioTexto();
 };
