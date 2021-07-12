@@ -2,6 +2,7 @@ const objEle = { // objetos elementos globais
   cores: document.querySelectorAll('.table .tr'),
   paragrafo: document.querySelector('#rgb-color'),
   iniciarBotao: document.querySelector('#reset-game'),
+  score: 0,
 };
 
 const objFun = { // objetos funções
@@ -24,24 +25,28 @@ const objFun = { // objetos funções
     const aleatorio = lista[Math.floor(Math.random() * 5)];
     objEle.paragrafo.innerText = aleatorio.style.backgroundColor;
   },
+  resetaTudo: function reset() {
+    objEle.iniciarBotao.addEventListener('click', () => {
+      document.querySelector('.tr').innerHTML = '';
+      objFun.criaPaleta();
+      objFun.aleatorioTexto();
+      document.querySelector('#answer').innerText = 'Escolha uma cor';
+    });
+  },
+  score: function pontos() {
+    objEle.score += 3;
+    document.querySelector('#score').innerHTML = objEle.score;
+  },
   jogo: function jogoDoBixo() {
     document.querySelector('.tr').addEventListener('click', (event) => {
       const inicio = document.querySelector('#answer');
       const texto = document.querySelector('#rgb-color').innerHTML;
       if (event.target.style.backgroundColor === texto) {
         inicio.innerHTML = 'Acertou!';
+        objFun.score();
       } else {
         inicio.innerHTML = 'Errou! Tente novamente!';
       }
-    });
-  },
-  start: function iniciar() {
-    objEle.iniciarBotao.addEventListener('click', () => {
-      document.querySelector('.tr').innerHTML = '';
-      objFun.criaPaleta();
-      objFun.aleatorioTexto();
-      document.querySelector('#answer').innerText = 'Escolha uma cor';
-      objFun.jogo();
     });
   },
 };
@@ -50,5 +55,5 @@ window.onload = () => {
   objFun.criaPaleta();
   objFun.aleatorioTexto();
   objFun.jogo();
-  objFun.start();
+  objFun.resetaTudo();
 };
