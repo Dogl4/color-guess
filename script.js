@@ -20,8 +20,19 @@ const objFun = { // objetos funções
   },
   aleatorioTexto: function text() { // atribui uma cor da paleta ao paragrafo
     const lista = document.querySelectorAll('.table .td');
-    const aleatorio = lista[Math.floor(Math.random() * 5)].style.backgroundColor;
-    objEle.paragrafo.innerText = aleatorio;
+    const aleatorio = lista[Math.floor(Math.random() * 5)];
+    objEle.paragrafo.innerText = aleatorio.style.backgroundColor;
+  },
+  jogo: function jogoDoBixo() {
+    document.querySelector('.tr').addEventListener('click', (event) => {
+      const inicio = document.querySelector('#answer');
+      const texto = document.querySelector('#rgb-color').innerHTML;
+      if (event.target.style.backgroundColor === texto) {
+        inicio.innerHTML = 'Acertou!';
+      } else {
+        inicio.innerHTML = 'Errou! Tente novamente!';
+      }
+    });
   },
 };
 
@@ -29,4 +40,5 @@ window.onload = () => {
   objFun.colorRadom();
   objFun.criaPaleta();
   objFun.aleatorioTexto();
+  objFun.jogo();
 };
